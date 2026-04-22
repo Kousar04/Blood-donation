@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Register · Hope in Every Drop</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+<!-- ✅ SAME CSS AS LOGIN (UNCHANGED) -->
+<style>
+/* (exact same CSS from your login.html — no changes) */
+:root {
+  --crimson: #9b0000;
+  --crimson-deep: #6b0000;
+  --crimson-light: #c0392b;
+  --blush: #fff5f5;
+  --rose: #fde8e8;
+  --white: #ffffff;
+  --text: #1a1a1a;
+  --muted: #6b6b6b;
+  --border: #e8d5d5;
+  --radius: 14px;
+  --error: #e74c3c;
+  --success: #27ae60;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+body{
+  font-family:'DM Sans',sans-serif;
+  background:var(--blush);
+  color:var(--text);
+  min-height:100vh;
+  display:grid;
+  grid-template-columns:1fr 1fr;
+}
+.left-panel{
+  background:linear-gradient(145deg,var(--crimson-deep),var(--crimson));
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  padding:60px;color:#fff;text-align:center;
+}
+.panel-logo{font-size:64px;margin-bottom:20px}
+.left-panel h2{font-family:'Playfair Display',serif;font-size:34px;margin-bottom:10px}
+.left-panel p{opacity:0.8}
+.panel-link{margin-top:30px}
+.panel-link a{color:#fff;font-weight:bold}
+
+.right-panel{display:flex;align-items:center;justify-content:center;padding:60px}
+.form-box{width:100%;max-width:420px}
+
+.field{margin-bottom:18px}
+.field label{font-size:13px;font-weight:600;margin-bottom:6px;display:block}
+.input-wrap{position:relative}
+.input-wrap i{position:absolute;left:12px;top:50%;transform:translateY(-50%)}
+.input-wrap input,.input-wrap select{
+  width:100%;padding:12px 12px 12px 38px;
+  border:1px solid var(--border);border-radius:8px;
+}
+
+.alert{display:none;padding:10px;border-radius:8px;margin-bottom:15px}
+.alert.error{background:#ffe6e6;color:var(--error);display:flex}
+.alert.success{background:#e6ffe6;color:var(--success);display:flex}
+
+.btn-submit{
+  width:100%;padding:14px;
+  background:var(--crimson);color:white;border:none;border-radius:8px;
+  cursor:pointer;font-weight:bold;
+}
+.btn-submit:hover{background:var(--crimson-deep)}
+
+.form-footer{text-align:center;margin-top:20px}
+</style>
+</head>
+
+<body>
+
+<!-- LEFT PANEL -->
+<div class="left-panel">
+  <div class="panel-logo"><i class="fa-solid fa-droplet"></i></div>
+  <h2>Join as a Donor</h2>
+  <p>Be the reason someone smiles today. Register and become a life saver.</p>
+  <div class="panel-link">
+    Already have an account? <a href="login.html">Login →</a>
+  </div>
+</div>
+
+<!-- RIGHT PANEL -->
+<div class="right-panel">
+  <div class="form-box">
+
+    <h1 style="font-family:'Playfair Display';margin-bottom:10px;">Create Account</h1>
+    <p style="color:gray;margin-bottom:25px;">Register as a blood donor</p>
+
+    <!-- ALERTS -->
+    <div class="alert error" id="errorMsg"></div>
+    <div class="alert success" id="successMsg"></div>
+
+    <!-- FORM -->
+    <div class="field">
+      <label>Name</label>
+      <div class="input-wrap">
+        <i class="fa-solid fa-user"></i>
+        <input type="text" id="name" placeholder="Your name">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Email</label>
+      <div class="input-wrap">
+        <i class="fa-solid fa-envelope"></i>
+        <input type="email" id="email" placeholder="you@example.com">
+      </div>
+    </div>
+
+    <div class="field">
+      <label>Password</label>
+      <div class="input-wrap">
+        <i class="fa-solid fa-lock"></i>
+        <input type="password" id="password" placeholder="Password">
+      </div>
+    </div>
+
+    <div class="field">
+  <label>Phone Number</label>
+  <div class="input-wrap">
+    <i class="fa-solid fa-phone"></i>
+    <input type="tel" id="phone" placeholder="Enter phone number">
+  </div>
+</div>
+
+    <div class="field">
+      <label>Blood Group</label>
+      <div class="input-wrap">
+        <i class="fa-solid fa-droplet"></i>
+        <select id="blood">
+          <option value="">Select</option>
+          <option>A+</option><option>B+</option><option>O+</option>
+          <option>A-</option><option>B-</option><option>O-</option>
+          <option>AB+</option><option>AB-</option>
+        </select>
+      </div>
+    </div>
+
+    <button class="btn-submit" onclick="handleRegister()">Register</button>
+
+    <div class="form-footer">
+      Already registered? <a href="login.html">Login</a>
+    </div>
+
+  </div>
+</div>
+
+<script>
+function showError(msg){
+  const el=document.getElementById('errorMsg');
+  el.innerText=msg;
+  el.style.display='block';
+  document.getElementById('successMsg').style.display='none';
+}
+
+function showSuccess(msg){
+  const el=document.getElementById('successMsg');
+  el.innerText=msg;
+  el.style.display='block';
+  document.getElementById('errorMsg').style.display='none';
+}
+
+function handleRegister() {
+
+  const name = document.getElementById('name').value.trim();
+  const email = document.getElementById('email').value.trim();
+  const password = document.getElementById('password').value.trim();
+  const phone = document.getElementById('phone').value.trim();
+  const blood = document.getElementById('blood').value;
+
+  if (!name || !email || !password || !blood || !phone) {
+  return showError("Please fill all fields");
+}
+
+  if (phone.length !== 10) {
+  return showError("Enter valid 10-digit phone number");
+}
+
+  const result = Auth.register(
+    name,
+    email,
+    password,
+    20,
+    blood,
+    "Bangalore",
+    phone
+  );
+
+  if (!result.ok) {
+    return showError(result.msg);
+  }
+
+  showSuccess("Registration successful!");
+
+  setTimeout(() => {
+    window.location.href = "login.html";
+  }, 1000);
+}
+</script>
+<script src="auth.js"></script>
+</body>
+</html>
