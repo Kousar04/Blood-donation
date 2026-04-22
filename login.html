@@ -247,29 +247,6 @@
   }
 
   function handleLogin() {
-<<<<<<< HEAD
-
-  const email = document.getElementById('email').value.trim();
-  const password = document.getElementById('password').value;
-
-  if (!email || !password) {
-    return showError("Please fill in all fields.");
-  }
-
-  const result = Auth.login(email, password);
-
-  if (!result.ok) {
-    return showError(result.msg);
-  }
-
-  showSuccess("Login successful!");
-
-  setTimeout(() => {
-    window.location.href = "dashboard.html";
-  }, 1000);
-}
-
-=======
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
 
@@ -277,37 +254,23 @@
       return showError("Please fill in all fields.");
     }
 
-    fetch("http://localhost:3000/login", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json"
-      },
-      body: JSON.stringify({ email, password })
-    })
-    .then(res => res.json())
-    .then(data => {
-      if (data.message === "Login success") {
-        showSuccess("Login successful!");
+    const result = Auth.login(email, password);
 
-        localStorage.setItem("user", JSON.stringify(data.user));
+    if (!result.ok) {
+      return showError(result.msg);
+    }
 
-        setTimeout(() => {
-          window.location.href = "dashboard.html";
-        }, 1200);
-      } else {
-        showError(data.message);
-      }
-    });
+    showSuccess("Login successful!");
+
+    setTimeout(() => {
+      window.location.href = "dashboard.html";
+    }, 1000);
   }
-
->>>>>>> e1865b4b7e31ffa0d57f505ca8170c3c648fa013
   document.addEventListener('keydown', e => {
     if (e.key === 'Enter') handleLogin();
   });
 </script>
-<<<<<<< HEAD
 <script src="auth.js"></script>
-=======
->>>>>>> e1865b4b7e31ffa0d57f505ca8170c3c648fa013
+
 </body>
 </html>
