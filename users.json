@@ -1,6 +1,5 @@
 [
   {
-<<<<<<< HEAD
     "name": "Aff",
     "email": "Aff@gmail.com",
     "password": "Aff0404",
@@ -17,11 +16,11 @@
     "email": "arfin8465@gmail.com",
     "password": "Arfin004",
     "blood": "A+"
-=======
+  },
+  {
     "name": "kousar",
-    "email": "Aff@gmail.com",
+    "email": "kousar@gmail.com",
     "password": "Aff0404",
     "blood": "B−"
->>>>>>> e1865b4b7e31ffa0d57f505ca8170c3c648fa013
   }
 ]
